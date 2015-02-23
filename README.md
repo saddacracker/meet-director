@@ -9,7 +9,8 @@ grunt serve
 ## Reference
 
 [Yeoman Generator](https://github.com/DaftMonk/generator-angular-fullstack)  
-[NPM Dumb Weights](https://www.npmjs.com/package/dumb-weights)
+[NPM Dumb Weights](https://www.npmjs.com/package/dumb-weights)  
+[Help with Child Objects in Mongoose](http://stackoverflow.com/questions/23627976/mongoose-how-to-insert-a-single-subdocument-not-an-array)
 
 ```javascript
 var plates = [

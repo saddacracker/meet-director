@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 var mongoose = require('mongoose').Mongoose;
-var Lifter = require('./lifter.model');
 var Attempt = require('../attempt/attempt.model');
+var Lifter = require('./lifter.model');
 
 // Get list of lifters
 exports.index = function(req, res) {
@@ -27,6 +27,7 @@ exports.showLifterAttempts = function(req, res) {
   Lifter.findById(req.params.id, function (err, lifter) {
     if(err) { return handleError(res, err); }
     if(!lifter) { return res.send(404); }
+        
     return res.json(lifter.attempts);
   });
 };
@@ -50,11 +51,21 @@ exports.update = function(req, res) {
     
     // lifter.attempts.push(attempt);
     
-    console.log('attempt from request: ' + req.body.attempt);
-    console.log('Attempt Object: ' + Attempt.findById(req.params.id));
+
     
     // check if there is an 'attempt' parameter
     if (req.body.attempt) {
+      
+      console.log('attempt from request is %s', req.body.attempt);
+      //console.log('Attempt Object: ' + Attempt.find(req.body.attempt));
+      
+      Attempt.findById( req.body.attempt, function (err, attempt) {
+        
+        if (err) { return handleError(res, err); }
+        if(!attempt) { return res.send(404); }
+        console.log('attempt %s', attempt);
+        lifter.attempts.push(req.body.attempt); // NOT GETTING CALLED?
+      });
       
       // @TODO: if id already exists, remove it from attempts?
       
@@ -62,23 +73,7 @@ exports.update = function(req, res) {
       
       // @TODO: catch error if Attempt Object isn't valid
       
-      // Add to this lifters attempts
-      // var subDocument = myDocument.mySubdocuments.id(mySubDocumentId);
-      lifter.attempts.push(req.body.attempt);
-      // lifter.attempts.push(Attempt.findById(req.params.id));
-      
     }
-    
-    // if (req.body.attempts) {
-    //
-    //     _.map(req.body.attempts, function(attempt) {
-    //
-    //         // push client id (converted from string to mongo object id) into clients
-    //         lifter.attempts.push(attempt);
-    //
-    //     });
-    //
-    // }
     
     
     if (err) { return handleError(res, err); }
