@@ -8,7 +8,7 @@ grunt serve
 
 ## Reference
 
-[Yeoman Generator](https://github.com/DaftMonk/generator-angular-fullstack)
+[Yeoman Generator](https://github.com/DaftMonk/generator-angular-fullstack)  
 [NPM Dumb Weights](https://www.npmjs.com/package/dumb-weights)
 
 ```javascript
