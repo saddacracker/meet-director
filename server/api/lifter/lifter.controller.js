@@ -68,37 +68,42 @@ exports.updateAttempt = function(req, res) {
   
   Lifter.findById(req.params.id, function (err, lifter) {
         
-    // lifter.attempts.push(req.params.attempt_id);
     
+   
+    lifter.attempts.push(req.params.attempt_id);    
+    
+
     // check if there is an 'attempt' parameter
-    if (req.params.attempt_id) {
-
-      console.log('attempt from request is %s', req.params.attempt_id);
-      //console.log('Attempt Object: ' + Attempt.find(req.body.attempt));
-
-      Attempt.findById( req.params.attempt_id, function (err, attempt) {
-
-        if (err) { return handleError(res, err); }
-        if(!attempt) { return res.send(404); }
-        console.log('attempt %s', attempt);
-        console.log('lifter %s', lifter);
-        console.log('lifter.attempts %s', lifter.attempts);
-        
-        // NOT GETTING CALLED????
-        lifter.attempts.push( req.params.attempt_id ); 
-      });
-
-      // @TODO: if id already exists, remove it from attempts?
-
-      // @TODO: verify attempt id is valid
-
-      // @TODO: catch error if Attempt Object isn't valid
-
-    }
+    // if (req.params.attempt_id) {
+    //
+    //   console.log('attempt from request is %s', req.params.attempt_id);
+    //   //console.log('Attempt Object: ' + Attempt.find(req.body.attempt));
+    //
+    //   Attempt.findById( req.params.attempt_id, function (err, attempt) {
+    //
+    //     if (err) { return handleError(res, err); }
+    //     if(!attempt) { return res.send(404); }
+    //     console.log('attempt %s', attempt);
+    //     console.log('lifter %s', lifter);
+    //     console.log('lifter.attempts %s', lifter.attempts);
+    //
+    //     // NOT GETTING CALLED????
+    //     lifter.attempts.push( req.params.attempt_id );
+    //   });
+    //
+    //   // @TODO: if id already exists, remove it from attempts?
+    //
+    //   // @TODO: verify attempt id is valid
+    //
+    //   // @TODO: catch error if Attempt Object isn't valid
+    //
+    // }
     
     
     if (err) { return handleError(res, err); }
     if(!lifter) { return res.send(404); }
+    
+    
     var updated = _.merge(lifter, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
