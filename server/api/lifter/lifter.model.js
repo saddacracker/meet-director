@@ -9,7 +9,7 @@ var LifterSchema = new Schema({
   lName: String,
   bodyWeight: Number,
   age: Number,
-  sex: String,
+  sex: { type: String, enum: ['Male', 'Female'] },
   rackHeightSquat: Number,
   rackHeightBench: Number,
   teamName: String,
